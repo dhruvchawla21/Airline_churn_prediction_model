@@ -8,10 +8,12 @@ A machine learning pipeline that predicts customer churn risk in an airline loya
 
 This project addresses a core airline retention problem: identifying which loyalty members are likely to disengage before they actually leave. It combines behavioral feature engineering, gradient boosting, and a non-technical dashboard so marketing managers can prioritize outreach without touching any code.
 
+**Live dashboard:** [airlinechurnpredictionmodel-21.streamlit.app](https://airlinechurnpredictionmodel-21.streamlit.app)
+
 **Key results:**
 - ROC AUC of **0.752** on held-out test data
 - Top 10% riskiest customers capture **50% of all churners** (5× lift over random)
-- 13,192 customers scored, segmented, and ready for campaign targeting
+- 13,191 customers scored, segmented, and ready for campaign targeting
 
 ---
 
