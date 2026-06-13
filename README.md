@@ -39,7 +39,7 @@ The notebook runs end-to-end in 8 phases:
 | 1–2 | **Data cleaning** — deduplication (3,871 duplicates removed), negative salary fix, constant column removal |
 | 3 | **Cohort definition** — customers with ≥1 flight in Jul 2017–Jun 2018 and not cancelled by June 2018 (13,191 members) |
 | 4 | **Churn label** — churn = no flights in H2 2018 OR cancelled in H2 2018 (422 churners, 3.2% base rate) |
-| 5 | **Feature engineering** — 39 features across recency, frequency, momentum, decay, distance, points engagement, regularity, and demographics |
+| 5 | **Feature engineering** — 41 features across recency, frequency, momentum, decay, distance, points engagement, regularity, seasonal activity, and demographics |
 | 6 | **Modeling** — XGBoost with class-weight balancing; 5-fold stratified CV; F1/F2-optimized thresholds |
 | 7 | **Scoring** — 5-seed ensemble refit on full labeled data; all customers scored |
 | 8 | **Segmentation** — 6 risk-value segments with a defined retention action playbook per segment |
@@ -52,6 +52,7 @@ The notebook runs end-to-end in 8 phases:
 - **Decay:** Recency-weighted activity (recent flights weighted more)
 - **Engagement:** Points accumulation, redemption, redemption ratio, ever-redeemed flag
 - **Regularity:** Longest zero-run, volatility (std, CV, concentration index)
+- **Seasonal:** Peak-season flight share (Jun–Aug, Dec), quarter concentration (from Calendar.csv)
 - **Demographics:** Card tier, education, marital status, gender, enrollment type (all one-hot encoded)
 
 > CLV and salary are excluded from model features to avoid leakage; CLV is used only for downstream value segmentation.
@@ -103,13 +104,7 @@ streamlit run retention_app.py
 ### Requirements
 
 ```bash
-pip install pandas numpy scikit-learn xgboost streamlit jupyter
-```
-
-Or with conda:
-```bash
-conda install pandas numpy scikit-learn xgboost
-pip install streamlit xgboost
+pip install -r requirements.txt
 ```
 
 ### Run the pipeline
@@ -136,10 +131,10 @@ streamlit run retention_app.py
 |------|------|-------------|
 | `Customer_Flight_Activity.csv` | 392,937 | Monthly flight transactions (Jul 2016–Dec 2018): flights, distance, points earned/redeemed |
 | `Customer_Loyalty_History.csv` | 16,738 | Customer master: demographics, card tier, CLV, enrollment/cancellation dates |
-| `Calendar.csv` | — | Reference calendar used for temporal feature joins |
+| `Calendar.csv` | — | Date dimension table used to derive quarter and seasonal features |
 | `Airline_Loyalty_Data_Dictionary.csv` | — | Field definitions for all input tables |
 
-> Raw data files are not included in this repository due to size. Place them in the project root before running the pipeline.
+All data files are included in this repository. Place them in the project root alongside the notebook.
 
 ---
 
