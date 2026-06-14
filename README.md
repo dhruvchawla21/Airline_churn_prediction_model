@@ -6,7 +6,7 @@ A machine learning pipeline that predicts customer churn risk in an airline loya
 
 ## Overview
 
-This project addresses a core airline retention problem: identifying which loyalty members are likely to disengage before they actually leave. It combines behavioral feature engineering, gradient boosting, and a non-technical dashboard so marketing managers can prioritize outreach without touching any code.
+This project builds a proactive airline loyalty intelligence system designed to detect customer disengagement before actual churn. By combining behavioral feature engineering, predictive modeling using gradient boosting, and an accessible dashboard interface, it helps marketing teams make timely, data-driven retention decisions without interacting with underlying code.
 
 **Live dashboard:** [airlinechurnpredictionmodel-21.streamlit.app](https://airlinechurnpredictionmodel-21.streamlit.app)
 
